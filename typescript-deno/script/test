@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
-deno test src --watch
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+
+if [[ "${1:-}" == "--watch" ]]; then
+  deno test src --watch
+else
+  deno test src
+fi
