@@ -1,5 +1,25 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
-brew install go
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+
+REQUIRED=(go)
+
+missing=()
+for bin in "${REQUIRED[@]}"; do
+  command -v "$bin" >/dev/null 2>&1 || missing+=("$bin")
+done
+
+if (( ${#missing[@]} )); then
+  echo "Missing required tools: ${missing[*]}" >&2
+  echo "" >&2
+  echo "This project declares its toolchain in .tool-versions:" >&2
+  sed 's/^/  /' .tool-versions >&2
+  echo "" >&2
+  echo "The easiest way to install them is mise (https://mise.jdx.dev):" >&2
+  echo "  mise install" >&2
+  exit 1
+fi
+
+go mod download
