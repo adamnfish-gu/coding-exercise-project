@@ -1,7 +1,25 @@
 #!/usr/bin/env bash
-set -euo pipefail
-IFS=$'\n\t'
-set -vx
 
-gem install bundler
+set -euo pipefail
+
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+
+REQUIRED=(ruby bundle)
+
+missing=()
+for bin in "${REQUIRED[@]}"; do
+  command -v "$bin" >/dev/null 2>&1 || missing+=("$bin")
+done
+
+if (( ${#missing[@]} )); then
+  echo "Missing required tools: ${missing[*]}" >&2
+  echo "" >&2
+  echo "This project declares its toolchain in .tool-versions:" >&2
+  sed 's/^/  /' .tool-versions >&2
+  echo "" >&2
+  echo "The easiest way to install them is mise (https://mise.jdx.dev):" >&2
+  echo "  mise install" >&2
+  exit 1
+fi
+
 bundle install
