@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+# mise builds PHP from source, so CI runners need the headers and build tools it
+# links against. Local users installing PHP from a package manager do not need this;
+# it exists for the GitHub Actions runner, which runs it before installing the toolchain.
+
+set -euo pipefail
+
+sudo apt-get update --quiet
+
+sudo apt-get install --yes --no-install-recommends \
+  autoconf \
+  bison \
+  build-essential \
+  libbz2-dev \
+  libcurl4-openssl-dev \
+  libfreetype6-dev \
+  libgd-dev \
+  libgmp-dev \
+  libicu-dev \
+  libjpeg-dev \
+  libonig-dev \
+  libpng-dev \
+  libpq-dev \
+  libreadline-dev \
+  libsodium-dev \
+  libsqlite3-dev \
+  libssl-dev \
+  libwebp-dev \
+  libxml2-dev \
+  libxslt1-dev \
+  libzip-dev \
+  pkg-config \
+  re2c \
+  zlib1g-dev
