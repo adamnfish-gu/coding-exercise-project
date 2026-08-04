@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+if which brew >/dev/null 2>&1 ; then
+  brew install maven
+else
+  echo "You don't have brew installed, so we can't automatically install Java and Maven. Please install them yourself."
+fi
