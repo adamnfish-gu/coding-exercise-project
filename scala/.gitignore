@@ -3,6 +3,3 @@
 .bsp
 metals.sbt
 
-# Temp install of sbt
-sbt/
-*.zip
