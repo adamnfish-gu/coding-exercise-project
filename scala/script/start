@@ -4,8 +4,4 @@ set -euo pipefail
 
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
-if [[ "${1:-}" == "--watch" ]]; then
-  sbt "~test"
-else
-  sbt test
-fi
+sbt run
