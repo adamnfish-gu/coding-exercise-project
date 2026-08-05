@@ -4,4 +4,4 @@ set -euo pipefail
 
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
-deno run src/mod.ts
+deno cache src/mod.test.ts
